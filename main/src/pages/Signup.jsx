@@ -24,6 +24,13 @@ export default function Signup() {
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
+            console.log(data);
+            if (!res.ok) { // Check for HTTP errors
+                setError(data.message || "An error occurred");
+                setLoading(false);
+                return;
+              }
+        
             if(data.success===false){
                 setError(data.message);
                 setLoading(false);
@@ -36,9 +43,9 @@ export default function Signup() {
             setLoading(false);
             setError(error.message);
         }
-        console.log(data);
     };
-    console.log(formData);
+    // console.log(formData);
+
     return (
         <div className="p-3 max-w-lg mx-auto">
             <h1 className="text-3xl text-rnd text-center font-semibold my-7">Sign Up</h1>
@@ -46,7 +53,7 @@ export default function Signup() {
                 <input type="text" placeholder="username" className="border p-3 rounded-lg" id="username" onChange={hchange}/>
                 <input type="email" placeholder="email" className="border p-3 rounded-lg" id="email" onChange={hchange}/>
                 <input type="password" placeholder="password" className="border p-3 rounded-lg" id="password" onChange={hchange}/>
-                <button disabled={loading} className="bg-rnd rounded-lg text-txt2 p-3 uppercase hover:opacity-95 disabled:opacity-80">{loading ?'Loading...': 'Sign Up'}</button>
+                <button disabled={loading} className="bg-rnd my-2 rounded-lg text-txt2 p-3 uppercase hover:opacity-95 disabled:opacity-80">{loading ?'Loading...': 'Sign Up'}</button>
             </form>
             <div className="flex gap-2 mt-5 ml-1">
                 <p>Have an account?</p>
