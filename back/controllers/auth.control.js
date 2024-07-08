@@ -22,7 +22,7 @@ export const signin= async (req,res,next)=>{
         if(!validuser) return next(errorHandler(404, 'User not found!'));
         const validpass =bcryptjs.compareSync(password,validuser.password);
         if(!validpass) return next(errorHandler(401, 'Wrong credentials!'));
-        const token =jwt.sign({ id:validuser._id},process.env.jwt_secret);
+        const token =jwt.sign({ id:validuser._id},process.env.JWT_SECRET);
         const {password: pass, ...rest}=validuser._doc;
         res.cookie('access_token',token,{httpOnly:true}).status(200).json(rest);
     }
