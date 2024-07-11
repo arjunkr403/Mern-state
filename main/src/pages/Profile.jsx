@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { app } from "../firebase";
-import { updateUserFailure,updateUserSuccess,updateUserStart } from "../redux/user/userSlice";
+import { updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserSuccess, deleteUserStart } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -14,6 +14,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setformData] = useState({});// empty object
   const [updateSuccess,setupdateSuccess]=useState(false);
+  const [deleteSuccess,setdeleteSuccess]=useState(false);
 
   useEffect(() => {
     if (file) {
@@ -69,6 +70,24 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message))
     }
   };
+
+  const handleDelete=async()=>{
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/back/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+        });
+        const data = await res.json();
+        if (!res.ok || data.success === false) {
+          dispatch(deleteUserFailure(data.message));
+          return;
+          }
+          dispatch(deleteUserSuccess(data));
+          setdeleteSuccess(true);
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message))
+    }
+  }
   return (
     <div className="p-3 max-w-lg m-auto">
       <h1 className="text-3xl text-rnd font-semibold text-center my-7">
@@ -125,7 +144,7 @@ export default function Profile() {
         {/* <button className="rounded-lg p-3 uppercase bg-rnd my-2 text-txt2 hover:opacity-95 ">Create listing</button> */}
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer">Delete account</span>
+        <span onClick={handleDelete} className="text-red-700 cursor-pointer">Delete account</span>
         <span className="text-red-700 cursor-pointer">Sign out</span>
       </div>
       <p className="text-red-700 mt-5">{error?error:''}</p>
