@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { app } from "../firebase";
-import { updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserSuccess, deleteUserStart } from "../redux/user/userSlice";
+import { updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserSuccess, deleteUserStart, signOutStart, signOutFailure, signOutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -14,13 +14,15 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setformData] = useState({});// empty object
   const [updateSuccess,setupdateSuccess]=useState(false);
-  const [deleteSuccess,setdeleteSuccess]=useState(false);
+
 
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
     }
   }, [file]); // if there is a file i.e [file] call this function
+
+
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app); // app from firebase.js to recognise which storage to use
@@ -43,11 +45,16 @@ export default function Profile() {
       },
     );
   };
-//...formdata:previous data
-  const handleChange=(e)=>{
+
+
+
+  const handleChange=(e)=>{ //...formdata:previous data
     setformData({
       ...formData,[e.target.id]: e.target.value,});//based on the id of user, it will track changes and put it inside the formdata
   };
+
+
+
   const handleSubmit= async(e)=>{
     e.preventDefault();
     try {
@@ -71,6 +78,8 @@ export default function Profile() {
     }
   };
 
+
+
   const handleDelete=async()=>{
     try {
       dispatch(deleteUserStart());
@@ -83,11 +92,29 @@ export default function Profile() {
           return;
           }
           dispatch(deleteUserSuccess(data));
-          setdeleteSuccess(true);
     } catch (error) {
       dispatch(deleteUserFailure(error.message))
     }
   }
+
+
+  const handleSignout = async()=>{
+    try {
+      dispatch(signOutStart());
+      const res= await fetch('/back/auth/signout');
+      const data = await res.json();
+      if (!res.ok || data.success === false) {
+        dispatch(signOutFailure(data.message));
+        return;
+        }
+        dispatch(signOutSuccess(data));
+    } catch (error) {
+      dispatch(signOutFailure(error.message));
+    }
+  };
+
+
+
   return (
     <div className="p-3 max-w-lg m-auto">
       <h1 className="text-3xl text-rnd font-semibold text-center my-7">
@@ -144,8 +171,8 @@ export default function Profile() {
         {/* <button className="rounded-lg p-3 uppercase bg-rnd my-2 text-txt2 hover:opacity-95 ">Create listing</button> */}
       </form>
       <div className="flex justify-between mt-5">
-        <span onClick={handleDelete} className="text-red-700 cursor-pointer">Delete account</span>
-        <span className="text-red-700 cursor-pointer">Sign out</span>
+        <span onClick={handleDelete} className="text-red-700 cursor-pointer">Delete Account</span>
+        <span onClick={handleSignout} className="text-red-700 cursor-pointer">Sign Out</span>
       </div>
       <p className="text-red-700 mt-5">{error?error:''}</p>
       <p className="text-green-700 mt-5">{updateSuccess?'User Updated Successfully!':''}</p>
