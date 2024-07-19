@@ -177,6 +177,7 @@ export default function Profile() {
       </div>
       <p className="text-red-700 mt-5">{error?error:''}</p>
       <p className="text-green-700 mt-5">{updateSuccess?'User Updated Successfully!':''}</p>
+      <p className="text-green-800 mt-5 text-center">Show Listings</p>
     </div>
   );
 }

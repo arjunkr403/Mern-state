@@ -38,9 +38,11 @@ export default function CreateListing() {
       const promises = [];
       setUploading(true);
       setImageUploadError(false);
+      // Create an array of Promises, each representing an image upload
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
       }
+      // Wait for all Promises to resolve
       Promise.all(promises).then((urls) => {
         //...formdata= keep previous info such as name,description,etc and imageurls will store the new urls into previous urls  using concat method
         setFormData({
@@ -50,6 +52,7 @@ export default function CreateListing() {
         setImageUploadError(false);
         setUploading(false);
       }).catch((err)=>{
+        // Handle any errors that occur during the upload process
         setImageUploadError('Image upload failed(2 MB max per image');
         setUploading(false);
       });

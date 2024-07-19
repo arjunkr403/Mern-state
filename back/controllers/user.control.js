@@ -1,13 +1,14 @@
+import Listing from "../models/listing.model.js";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
-//test api route
+//test 'back' route
 export const test=(req,res)=>{
     res.json({
         message:"hello my world",
     });
 };
-//update api route
+//update 'back' route
 export const updateUser= async (req,res,next)=>{
     if(req.user.id !== req.params.id) return next(errorHandler(401,'You can only update your own account'))
     try {
@@ -31,7 +32,7 @@ export const updateUser= async (req,res,next)=>{
 };
 
 
-//delete api route
+//delete 'back' route
 export const deleteUser =async(req,res,next)=>{
     if(req.user.id !== req.params.id) return next(errorHandler(401,'You can only delete your own account'))
     try {
@@ -40,5 +41,25 @@ export const deleteUser =async(req,res,next)=>{
         res.status(200).json('User has been deleted!');// then send response of success
     } catch (error) {
         next(error)
+    }
+};
+
+
+//get user listing 'back' route
+export const getUserListings = async(req,res,next)=>{
+// Check if the user making the request is the same as the user whose listings are being requested
+    if(req.user.id === req.params.id){
+        try {
+            // Find all listings associated with the user ID
+            const listings = await Listing.find({
+                userRef:req.params.id});
+                // Respond with the listings in JSON format
+                res.status(200).json(listings);
+        } catch (error) {
+            next(error)
+        }
+    }
+    else{
+        return next(errorHandler(401,'You can only view your own listings!'));
     }
 };
