@@ -245,7 +245,7 @@ export default function CreateListing() {
                 <span className="text-xs">(₹ per month)</span>
               </div>
             </div>
-            {formData.offer&& (
+            {formData.offer && (
             <div className="flex items-center gap-2">
               <input
                 type="number"
