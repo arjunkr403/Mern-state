@@ -29,3 +29,21 @@ export const deleteListing = async (req,res,next) =>{
         next(error);
     }
 };
+
+
+export const updateListing =async (req, res, next) =>{
+
+    const listing =await Listing.findById(req.params.id);
+    if(!listing) return next(errorHandler(404,'Listing not found !!!'));
+    //req.user.id we get from jwt cookie
+    if(req.user.id !==listing.userRef) return next(errorHandler(401,'You can update your own listings!'));
+    try {
+        const updateListing = await Listing.findByIdAndUpdate(req.params.id,
+        req.body,
+        {new: true} //used to get updated one data
+        );
+        res.status(200).json(updateListing);  
+    } catch (error) {
+        next(error);
+    }
+};
