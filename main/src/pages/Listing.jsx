@@ -9,12 +9,11 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
-// import Contact from '../components/Contact.j';
+import Contact from '../components/Contact';
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -99,11 +98,11 @@ export default function Listing() {
               {listing.address}
             </p>
             <div className="flex gap-4">
-              <p className="bg-red-700 w-full max-w-[200px] text-txt2 text-center p-1 rounded-md">
+              <p className="bg-red-700 w-full max-w-[200px] text-txt2 text-center p-1 rounded-md hover:opacity-95">
                 {listing.type === "rent" ? "For Rent" : "For Sale"}
               </p>
               {listing.offer && (
-                <p className="bg-green-700 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                <p className="bg-green-700 w-full max-w-[200px] text-white text-center p-1 rounded-md hover:opacity-95">
                   ₹{+listing.regularPrice - +listing.discountPrice} OFF
                 </p>
               )}
@@ -138,6 +137,13 @@ export default function Listing() {
                   : 'Unfurnished'}
               </li>
             </ul>
+            {//condition for checking whether the creater of listing is not equal to visiter
+              //it defines that if the visitor or user is not the creater or landlord of that listing , show the contact landlord btn otherwise hide the btn 
+              currentUser && listing.userRef !== currentUser._id && !contact
+            &&(
+                <button onClick={() =>setContact(true)} className="bg-rnd text-txt2 p-3 rounded-md hover:opacity-95 uppercase">Contact Landlord</button>
+              )}
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}

@@ -63,3 +63,18 @@ export const getUserListings = async(req,res,next)=>{
         return next(errorHandler(401,'You can only view your own listings!'));
     }
 };
+
+
+
+export const getUser = async (req, res, next) => {
+    try {//store the user information according to the requested id in the User model and store information(username,pass,email,avatar) corresponding to the 'id' in the user var
+    const user = await User.findById(req.params.id);
+    if (!user) return next(errorHandler(404, 'User not found !!!'));
+    //seperate password from the rest of information for privacy 
+    const { pass, ...rest } = user._doc;
+        res.status(200).json(rest);//change response into json format
+    
+} catch (error) {
+    next(error)
+}  
+};

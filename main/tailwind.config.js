@@ -26,7 +26,7 @@ module.exports = {
         'txt2':'#EEEEEE',
         'rnd':'#31363F',
         'glight':'#A0A0A0',
-        'gdark':'#696969'
+        'gdark':'#404040'
         // Add more custom colors here if needed
       },
     },
