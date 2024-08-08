@@ -56,11 +56,13 @@ export const getListing = async (req, res, next) => {
 
 export const getListings = async (req, res, next) => {
     try {
+      //limit -limits the no. of doc returned
         const limit = parseInt(req.query.limit) || 9;
+        //used to skip the specified no. of doc
         const startIndex = parseInt(req.query.startIndex) || 0;
 
         let offer = req.query.offer;
-
+      //$in :- used where the value of a field equals any value in the specified array.
         if (offer === undefined || offer === "false") {
             offer = { $in: [false, true] };
         }
@@ -89,11 +91,12 @@ export const getListings = async (req, res, next) => {
         //regex is build-in search functionality in MongoDb
         //searching is not limited to a word , it can search a part of the word as well
         const listings=await Listing.find({
-            name:{$regex: searchTerm, $options:'i'},//i = will not care about uppercase or lowercase
+            name:{$regex: searchTerm, $options:'i'},//i = make search case insensitive
             offer,
             furnished,
             type,
             parking,
+          
         }).sort({[sort]:order}).limit(limit).skip(startIndex);
         
         return res.status(200).json(listings); 
