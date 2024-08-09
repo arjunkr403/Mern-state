@@ -252,7 +252,7 @@ export default function CreateListing() {
                 id="discountPrice"
                 className="border-glight border p-3 rounded-lg"
                 min="0"
-                max="1000000"
+                max="1000000000"
                 required onChange={handleChangeList} value={formData.discountPrice}
               />
               <div className="flex flex-col items-center">

@@ -7,7 +7,7 @@ export default function ListingItem({ listing }) {
       <Link to={`/listing/${listing._id}`}>
         <img
           className="object-cover w-full h-[320px] sm:h-[220px] hover:scale-105 transition-scale duration-300"
-          src={listing.imageUrls[0]}
+          src={listing.imageUrls[0] || 'https://imgs.search.brave.com/sftZRwCU0JOFWDHclMVp8tqa7crZG9DZjoMwnZ-LIyU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTcy/MzAxMDIxL3Bob3Rv/L2hvbWUtZm9yLXNh/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPUNSSVY4SW0y/RUR6ZmtMNDBFdDlj/SWZrZXhKQjV2Vm42/S0IwbU5JSXFfNDA9' }
           alt="listing cover"
         />
         <div className="p-3 flex-col gap-2 w-full">
