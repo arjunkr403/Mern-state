@@ -33,8 +33,8 @@ export default function Header() {
         <div className='flex justify-between items-center max-w-7.5xl mx-auto p-2'>
          <Link to='/'>
         <h1 className='font-bold text-sm sm:text-xl flex-wrap'>
-            <span className='text-txt1'>Good</span>
-            <span className='text-txt2'>Homes</span>
+            <span className='text-[#33a1fd] pl-1'>Home</span>
+            <span className='text-txt2'>Heaven</span>
         </h1>
          </Link>   
         <form onSubmit={handleSubmit} className='bg-txt2 rounded-lg flex items-center p-3 '>

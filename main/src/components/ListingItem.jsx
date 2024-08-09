@@ -11,12 +11,12 @@ export default function ListingItem({ listing }) {
           alt="listing cover"
         />
         <div className="p-3 flex-col gap-2 w-full">
-          <p className="truncate text-lg font-semibold text-rnd">
+          <p className="truncate text-lg font-bold text-rnd">
             {listing.name}
           </p>
           <div className="flex gap-1 items-center">
             <MdLocationOn className="h-4 w-4 text-green-700" />
-            <p className="truncate text-sm text-gdark w-full">
+            <p className="truncate text-sm font-semibold text-gdark w-full">
               {listing.address}
             </p>
           </div>

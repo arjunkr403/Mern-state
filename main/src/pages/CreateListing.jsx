@@ -32,7 +32,8 @@ export default function CreateListing() {
     parking:false,
     furnished:false,
   });
-
+  console.log(formData);
+  
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length+formData.imageUrls.length< 7) {
       const promises = [];
