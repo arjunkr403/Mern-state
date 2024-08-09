@@ -25,11 +25,13 @@ module.exports = {
         'txt1':'#76ABAE',
         'txt2':'#EEEEEE',
         'rnd':'#31363F',
-        'glight':'#A0A0A0',
+        'glight':'#505050',
         'gdark':'#404040'
         // Add more custom colors here if needed
       },
     },
   },
-  plugins: [],
+  plugins: [ require('@tailwindcss/line-clamp'),
+    
+  ],
 };
