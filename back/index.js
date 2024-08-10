@@ -30,10 +30,10 @@ app.use("/back/user", userRouter);
 app.use("/back/auth", authRouter);
 app.use("/back/listing", listingRouter);
 
-app.use(express.static(path.join(__dirname,'/main/dist')));
+app.use(express.static(path.join(__dirname,'/front/dist')));
 
 app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'main','dist','index.html'));
+  res.sendFile(path.join(__dirname,'front','dist','index.html'));
 })
 //Middleware
 app.use((err, req, res, next) => {
