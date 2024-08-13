@@ -25,9 +25,9 @@ export default function ListingItem({ listing }) {
             {listing.description}
           </p>
           <p className="text-[#5bc6cc] mt-2 text-xl hover:text-green-500 transition-colors duration-300 font-semibold">
-            //(listing.discountPrice ||listing.regularPrice / 10000000) % 1 === 0 :- checks if both are integer or not ,if they are then show without any decimals
-            //If not, it displays the number with two decimal places but removes .00 if it exists using .replace(/\.00$/, "") and toFixed is used to print upto 2 decimal places
-            // (/\.00$/, "")- is a regular expression '\.' matches '.' in the price /\.00$ find pattern in price as .00 with $ represents the end of string
+             {/* listing.discountPrice ||listing.regularPrice / 10000000 % 1 === 0 :- checks if both are integer or not ,if they are then show without any decimals
+            If not, it displays the number with two decimal places but removes .00 if it exists using .replace(/\.00$/, "") and toFixed is used to print upto 2 decimal places
+             (/\.00$/, "")- is a regular expression '\.' matches '.' in the price /\.00$ find pattern in price as .00 with $ represents the end of string  */}
             ₹
             {listing.offer
               ? listing.discountPrice >= 10000000
