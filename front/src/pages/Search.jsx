@@ -129,22 +129,22 @@ export default function Search() {
     };
   return (
     <div className="flex flex-col md:flex-row ">
-      <div className="p-7 border-b-2  md:border-r-2 md:min-h-screen">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 ">
             <div className="flex items-center gap-2">
-                <label className="whitespace-nowrap font-semibold">Search here: 
+                <label className=" text-sm md:text-base whitespace-nowrap font-semibold">Search here: 
                 </label>
             <input
                 type="text"
                 id="searchTerm"
                 placeholder="type keywords..."
-                className="p-3 w-full border rounded-lg"
+                className="p-2 md:p-3 w-full border rounded-lg"
                 value={sidebardata.searchTerm}
                 onChange={handleChange}/>
             </div>
             <div className="flex flex-wrap gap-2 items-center">
                 <div className="flex gap-2">
-                <label className="font-semibold">Type: </label>
+                <label className=" text-sm md:text-base font-semibold">Type: </label>
                     <input 
                     type="checkbox"
                     className="w-5"
@@ -152,7 +152,7 @@ export default function Search() {
                     checked={sidebardata.type==='all'}
                     onChange={handleChange}
                     />
-                    <span>Rent & Sale</span>
+                    <span className="text-sm md:text-base">Rent & Sale</span>
                 </div>
                 <div className="flex gap-2">
                     <input
@@ -162,7 +162,7 @@ export default function Search() {
                     checked={sidebardata.type==='rent'}
                     onChange={handleChange}
                     />
-                    <span>Rent</span>
+                    <span className="text-sm md:text-base">Rent</span>
                 </div>  
                 <div className="flex gap-2">
                     <input
@@ -172,7 +172,7 @@ export default function Search() {
                     checked={sidebardata.type==='sale'}
                     onChange={handleChange}
                     />
-                    <span>Sale</span>
+                    <span className="text-sm md:text-base">Sale</span>
                 </div>
                 <div className="flex gap-2">
                     <input
@@ -182,12 +182,12 @@ export default function Search() {
                     checked={sidebardata.offer}
                     onChange={handleChange}
                     />
-                    <span>Offer</span>
+                    <span className="text-sm md:text-base">Offer</span>
                 </div> 
             </div>
             <div className="flex flex-wrap gap-2 items-center">
                 <div className="flex gap-2">
-                    <label className="font-semibold">Amenities: </label>
+                    <label className=" text-sm md:text-base font-semibold">Amenities: </label>
                     <input
                     type="checkbox"
                     className="w-5"
@@ -195,7 +195,7 @@ export default function Search() {
                     checked={sidebardata.parking}
                     onChange={handleChange}
                     />
-                    <span>Parking</span>
+                    <span className="text-sm md:text-base">Parking</span>
                 </div>
                 <div className="flex gap-2">
                     <input
@@ -205,12 +205,12 @@ export default function Search() {
                     checked={sidebardata.furnished}
                     onChange={handleChange}
                     />
-                    <span>Furnished</span>
+                    <span className="text-sm md:text-base">Furnished</span>
                 </div>  
             </div>
             <div className="flex items-center gap-2">
-                <label className="font-semibold">Sort: </label>
-                <select  className="p-3 border rounded-lg" id="sort_order"
+                <label className=" text-sm md:text-base font-semibold">Sort: </label>
+                <select  className="p-2 text-sm md:text-base h-[35px] md:h-[50px] border rounded-lg" id="sort_order"
                 defaultValue={'created_at_desc'}
                 onChange={handleChange}>
                     <option value="regularPrice_asc">Price low to high</option>    
@@ -219,12 +219,12 @@ export default function Search() {
                     <option value="createdAt_asc">Oldest</option>    
                 </select>
             </div>
-            <button  className="border rounded-lg bg-rnd text-txt2 p-3 uppercase hover:opacity-95">Search</button>   
+            <button  className="border rounded-lg bg-rnd text-txt2 text-sm md:text-base p-2 md:p-3 uppercase hover:opacity-95">Search</button>   
         </form>
       </div>
-      <div className="flex-1 flex-grow">
+      <div className="flex-1 flex-grow ">
         <h1 className="text-3xl font-semibold text-center p-3 text-gdark mt-5">Listing Results:</h1>
-        <div className="p-7 flex flex-wrap gap-4 ">
+        <div className="p-7 flex flex-wrap gap-4 justify-between">
             {!loading && listings.length===0 &&(
                 <p className="text-2xl font-semibold text-rnd">No listing found !!!</p>
             )}
