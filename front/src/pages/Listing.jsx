@@ -102,10 +102,23 @@ export default function Listing() {
                 {listing.type === "rent" ? "For Rent" : "For Sale"}
               </p>
               {listing.offer && (
-                <p className="bg-green-700 w-full max-w-[200px] text-txt2 text-center p-1 rounded-md hover:opacity-95">
-                  ₹{+listing.regularPrice - +listing.discountPrice} OFF
-                </p>
-              )}
+  <p className="bg-green-700 w-full max-w-[200px] text-txt2 text-center p-1 rounded-md hover:opacity-95">
+    {/* listing.discountPrice ||listing.regularPrice / 10000000 % 1 === 0 :- checks if both are integer or not ,if they are then show without any decimals
+            If not, it displays the number with two decimal places but removes .00 if it exists using .replace(/\.00$/, "") and toFixed is used to print upto 2 decimal places
+             (/\.00$/, "")- is a regular expression '\.' matches '.' in the price /\.00$ find pattern in price as .00 with $ represents the end of string  */}
+    ₹
+    {(+listing.regularPrice - +listing.discountPrice) >= 10000000
+      ? ((+listing.regularPrice - +listing.discountPrice) / 10000000) % 1 === 0
+        ? (+listing.regularPrice - +listing.discountPrice) / 10000000 + " Cr. OFF" //format for integer
+        : ((+listing.regularPrice - +listing.discountPrice) / 10000000).toFixed(2).replace(/\.00$/, "") + " Cr. OFF"//format for float
+      : (+listing.regularPrice - +listing.discountPrice) >= 100000
+      ? ((+listing.regularPrice - +listing.discountPrice) / 100000) % 1 === 0
+        ? (+listing.regularPrice - +listing.discountPrice) / 100000 + " L. OFF"
+        : ((+listing.regularPrice - +listing.discountPrice) / 100000).toFixed(2).replace(/\.00$/, "") + " L. OFF"
+      : (+listing.regularPrice - +listing.discountPrice).toLocaleString("en-IN") + " OFF"}
+  </p>
+)}
+
             </div>
             <p className="text-glight">
               <span className="font-semibold text-black">Description- </span>
