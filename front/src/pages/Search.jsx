@@ -128,8 +128,8 @@ export default function Search() {
         setListings([...listings,...data]);
     };
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
+    <div className="flex flex-col md:flex-row ">
+      <div className="p-7 border-b-2  md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
             <div className="flex items-center gap-2">
                 <label className="whitespace-nowrap font-semibold">Search here: 
@@ -222,9 +222,9 @@ export default function Search() {
             <button  className="border rounded-lg bg-rnd text-txt2 p-3 uppercase hover:opacity-95">Search</button>   
         </form>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 flex-grow">
         <h1 className="text-3xl font-semibold text-center p-3 text-gdark mt-5">Listing Results:</h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="p-7 flex flex-wrap gap-4 ">
             {!loading && listings.length===0 &&(
                 <p className="text-2xl font-semibold text-rnd">No listing found !!!</p>
             )}
@@ -237,7 +237,7 @@ export default function Search() {
             }
             {
                 showMore && (
-                    <button className="text-green-600 hover:underline pt-4"
+                    <button className="text-left text-green-600 w-full hover:underline pt-4"
                     onClick={handleShowMore}>Show more</button>
                 )
             }

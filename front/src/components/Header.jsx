@@ -32,13 +32,13 @@ export default function Header() {
     <header className='bg-back shadow-md'>
         <div className='flex justify-between items-center max-w-7.5xl mx-auto p-2'>
          <Link to='/'>
-        <h1 className='font-bold text-sm sm:text-xl flex-wrap'>
+        <h1 className='font-bold text-base sm:text-xl flex-wrap'>
             <span className='text-[#33a1fd] pl-1'>Home</span>
             <span className='text-txt2'>Heaven</span>
         </h1>
          </Link>   
         <form onSubmit={handleSubmit} className='bg-txt2 rounded-lg flex items-center p-3 '>
-            <input type="text-rnd" placeholder='Search...' className='bg-transparent focus:outline-none w-24 sm:w-64'
+            <input type="text-rnd" placeholder='Search...' className='bg-transparent focus:outline-none w-24 h-3 sm:h-6 sm:w-64'
             value={searchTerm} 
             onChange={(e)=>setSearchTerm(e.target.value)}/>
             <button>
