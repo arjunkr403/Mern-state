@@ -224,7 +224,7 @@ export default function Search() {
       </div>
       <div className="flex-1 flex-grow ">
         <h1 className="text-3xl font-semibold text-center p-3 text-gdark mt-5">Listing Results:</h1>
-        <div className="p-7 flex flex-wrap gap-4 justify-between">
+        <div className="p-7 flex flex-wrap gap-4">
             {!loading && listings.length===0 &&(
                 <p className="text-2xl font-semibold text-rnd">No listing found !!!</p>
             )}

@@ -301,7 +301,7 @@ export default function UpdateListing() {
                 id="regularPrice"
                 className="border-glight border p-3 rounded-lg"
                 min="4000"
-                max="1000000"
+                max="1000000000"
                 required
                 onChange={handleChangeList}
                 value={formData.regularPrice}
@@ -318,7 +318,7 @@ export default function UpdateListing() {
                   id="discountPrice"
                   className="border-glight border p-3 rounded-lg"
                   min="0"
-                  max="1000000"
+                  max="1000000000"
                   required
                   onChange={handleChangeList}
                   value={formData.discountPrice}
