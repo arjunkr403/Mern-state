@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon back/index.js",
-    "start": "node back/index.js",
-    "build":"npm install && npm install --prefix front && npm run build --prefix front"
+    "start": "node back/index.js"
   },
   "keywords": [],
   "author": "",

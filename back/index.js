@@ -30,13 +30,14 @@ app.use("/back/user", userRouter);
 app.use("/back/auth", authRouter);
 app.use("/back/listing", listingRouter);
 
+//-----------------------------------------------------------------------
 // Serve static files from the "front/dist" directory
-app.use(express.static(path.join(__dirname, "front", "dist")));
-
-// Serve the index.html file for all remaining routes
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "front", "dist")));
+// // Serve the index.html file for all remaining routes
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
+// });
+//-----------------------------------------------------------------------
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
