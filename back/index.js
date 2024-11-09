@@ -11,7 +11,10 @@ dotenv.config();
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO)
+  .connect(process.env.MONGO,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -22,6 +25,14 @@ mongoose
 const app = express();
 const __dirname = path.resolve();
 
+// Serve static files from the "front/dist" directory
+app.use(express.static(path.join(__dirname, "front", "dist")));
+// Serve the index.html file for all remaining routes
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
+});
+
+//middleware
 app.use(express.json()); // Allow JSON as the input
 app.use(cookieParser());
 
@@ -30,14 +41,12 @@ app.use("/back/user", userRouter);
 app.use("/back/auth", authRouter);
 app.use("/back/listing", listingRouter);
 
-//-----------------------------------------------------------------------
-// Serve static files from the "front/dist" directory
-// app.use(express.static(path.join(__dirname, "front", "dist")));
-// // Serve the index.html file for all remaining routes
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
-// });
-//-----------------------------------------------------------------------
+//cors middleware
+// app.use(cors({
+//   origin: "", 
+//   credentials: true,
+// }));
+
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
