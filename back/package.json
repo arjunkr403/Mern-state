@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon back/index.js",
-    "start": "node back/index.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "build": "npm install && npm install --prefix ../front && npm run build --prefix ../front"
   },
   "keywords": [],
