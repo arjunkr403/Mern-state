@@ -1,15 +1,20 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  server:{
-    proxy: {
-      '/back':{
-        target: process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : 'http://localhost:3000/',
-        secure: process.env.NODE_ENV === 'production',
+export default defineConfig(({ mode }) => {
+  // Load environment variables based on the current mode
+  const env = loadEnv(mode, process.cwd());
+
+  return {
+    server: {
+      proxy: {
+        '/back': {
+          target: mode === 'production' ? env.VITE_BACKEND_URL : 'http://localhost:3000',
+          secure: mode === 'production',
+          changeOrigin: true,
+        },
       },
     },
-  },
-  plugins: [react()],
-})
+    plugins: [react()],
+  };
+});
