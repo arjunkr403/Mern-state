@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from "cors";
 
 dotenv.config();
 
@@ -42,10 +43,10 @@ app.use("/back/auth", authRouter);
 app.use("/back/listing", listingRouter);
 
 //cors middleware
-// app.use(cors({
-//   origin: "", 
-//   credentials: true,
-// }));
+app.use(cors({
+  origin: "", 
+  credentials: true,
+}));
 
 
 // Error-handling middleware
