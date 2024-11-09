@@ -12,10 +12,7 @@ dotenv.config();
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -24,14 +21,18 @@ mongoose
   });
 
 const app = express();
-const __dirname = path.resolve();
 
-// Serve static files from the "front/dist" directory
-app.use(express.static(path.join(__dirname, "front", "dist")));
-// Serve the index.html file for all remaining routes
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  
+  const __dirname = path.resolve();
+
+  // Serve static files from the "front/dist" directory
+  app.use(express.static(path.join(__dirname, "front", "dist")));
+  // Serve the index.html file for all remaining routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
+  });
+}
 
 //middleware
 app.use(express.json()); // Allow JSON as the input
@@ -43,11 +44,12 @@ app.use("/back/auth", authRouter);
 app.use("/back/listing", listingRouter);
 
 //cors middleware
-app.use(cors({
-  origin: "", 
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: "",
+    credentials: true,
+  })
+);
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
@@ -61,7 +63,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
