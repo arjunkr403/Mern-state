@@ -46,7 +46,7 @@ app.use("/back/listing", listingRouter);
 //cors middleware
 app.use(
   cors({
-    origin: "",
+    origin: "http://localhost:5173" || "https://mern-state-harfc3nb4-arjunkr403s-projects.vercel.app",
     credentials: true,
   })
 );
