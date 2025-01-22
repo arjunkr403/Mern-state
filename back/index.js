@@ -38,11 +38,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json()); // Allow JSON as the input
 app.use(cookieParser());
 
-// Serve API routes
-app.use("/back/user", userRouter);
-app.use("/back/auth", authRouter);
-app.use("/back/listing", listingRouter);
-
 //cors middleware
 app.use(
   cors({
@@ -50,6 +45,11 @@ app.use(
     credentials: true,
   })
 );
+
+// Serve API routes
+app.use("/back/user", userRouter);
+app.use("/back/auth", authRouter);
+app.use("/back/listing", listingRouter);
 
 // Error-handling middleware
 app.use((err, req, res, next) => {

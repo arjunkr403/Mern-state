@@ -1,4 +1,4 @@
-import React ,{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination,EffectFade} from "swiper/modules";
@@ -66,7 +66,7 @@ export default function Home() {
           to={"/search"}
           className="hover:underline text-[#1d24ca] text-xs sm:text-sm font-bold "
         >
-          <span>Let's Start now...</span>
+          <span>Let&apos;s Start now...</span>
         </Link>
       </div>
       {/*sliding images*/}
