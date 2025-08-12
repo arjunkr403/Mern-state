@@ -6,17 +6,20 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from "cors";
 
 dotenv.config();
 
+
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO)
+  .connect(process.env.MONGO || "mongodb+srv://arjun:arjun@cluster0.mrhtx0u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.log(err);
+    process.exit(1);
   });
 
 const app = express();
@@ -24,6 +27,14 @@ const __dirname = path.resolve();
 
 app.use(express.json()); // Allow JSON as the input
 app.use(cookieParser());
+
+//Configure CORS
+app.use(cors({
+  origin: "http://localhost:5174", // frontend URL
+  credentials: true // if you send cookies or auth headers
+}));
+
+
 
 // Serve API routes
 app.use("/back/user", userRouter);

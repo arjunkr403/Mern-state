@@ -3,7 +3,11 @@ import { Link, useNavigate} from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 export default function Signup() {
-    const [formData,setFormData]=useState({});
+    const [formData,setFormData]=useState({
+        username: '',
+        email: '',  
+        password: '',
+    });
     const [error,setError]=useState(null);
     const [loading,setLoading]= useState(false);
     const nav=useNavigate();
@@ -17,6 +21,7 @@ export default function Signup() {
         e.preventDefault();
         try {
             setLoading(true);
+            console.log(formData);
             const res = await fetch('/back/auth/signup',{
                 method:'POST',
                 headers:{

@@ -71,7 +71,7 @@ export const getUser = async (req, res, next) => {
     const user = await User.findById(req.params.id);
     if (!user) return next(errorHandler(404, 'User not found !!!'));
     //seperate password from the rest of information for privacy 
-    const { pass, ...rest } = user._doc;
+    const { password, ...rest } = user._doc;
         res.status(200).json(rest);//change response into json format
     
 } catch (error) {

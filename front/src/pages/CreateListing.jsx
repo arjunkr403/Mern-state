@@ -4,7 +4,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import React, { useState } from "react";
+import { useState } from "react";
 import {useSelector} from 'react-redux';
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,6 @@ export default function CreateListing() {
     type: "rent",
     baths: 1,
     beds: 1,
-    offer: false,
     regularPrice: 4000,
     discountPrice: 0,
     offer:false,
@@ -34,7 +33,7 @@ export default function CreateListing() {
   });
   console.log(formData);
   
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length+formData.imageUrls.length< 7) {
       const promises = [];
       setUploading(true);
@@ -54,7 +53,7 @@ export default function CreateListing() {
         setUploading(false);
       }).catch((err)=>{
         // Handle any errors that occur during the upload process
-        setImageUploadError('Image upload failed(5 MB max per image)');
+        setImageUploadError('Image upload failed(5 MB max per image)',err);
         setUploading(false);
       });
     }

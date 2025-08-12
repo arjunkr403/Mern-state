@@ -9,7 +9,10 @@ import {
 import OAuth from "../components/OAuth";
 
 export default function Signin() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const { loading, error } = useSelector((state) => state.user);
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ export default function Signin() {
     e.preventDefault();
     try {
       dispatch(signInStart());
+      console.log(formData);
       const res = await fetch("/back/auth/signin", {
         method: "POST",
         headers: {
@@ -72,7 +76,7 @@ export default function Signin() {
         <OAuth/>  
       </form>
       <div className="flex gap-2 mt-5 ml-1">
-        <p>Don't have an account?</p>
+        <p>Don&apos;t have an account?</p>
         <Link to={"/sign-up"}>
           <span className="text-blue-700 font-semibold">Sign up</span>
         </Link>
