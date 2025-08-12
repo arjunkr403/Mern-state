@@ -5,7 +5,7 @@ import { Navigation, Autoplay, Pagination,EffectFade} from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
-import { BACKEND_URL } from "../utils/constants";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
