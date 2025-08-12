@@ -7,7 +7,6 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Signin() {
   const [formData, setFormData] = useState({
@@ -28,7 +27,7 @@ export default function Signin() {
     try {
       dispatch(signInStart());
       console.log(formData);
-      const res = await fetch(`${BACKEND_URL}/back/auth/signin`, {
+      const res = await fetch("/back/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

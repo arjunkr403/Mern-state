@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Search() {
     const nav = useNavigate();
@@ -51,7 +50,7 @@ export default function Search() {
                 setLoading(true);
                 setShowMore(false);
                 const searchQuery=url.toString();
-                const res = await fetch(`${BACKEND_URL}/back/listing/get?${searchQuery}`);
+                const res = await fetch(`/back/listing/get?${searchQuery}`);
                 const data = await res.json();
                 if(data.length>=9){
                     setShowMore(true);
@@ -121,7 +120,7 @@ export default function Search() {
         const url= new URLSearchParams(location.search);
         url.set('startIndex',startIndex);
         const searchQuery=url.toString();
-        const res= await fetch(`${BACKEND_URL}/back/listing/get?${searchQuery}`);
+        const res= await fetch(`/back/listing/get?${searchQuery}`);
         const data= await res.json();
         if(data.length< 9){
             setShowMore(false);

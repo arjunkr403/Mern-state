@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import OAuth from "../components/OAuth";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Signup() {
     const [formData,setFormData]=useState({
@@ -23,7 +22,7 @@ export default function Signup() {
         try {
             setLoading(true);
             console.log(formData);
-            const res = await fetch(`${BACKEND_URL}/back/auth/signup`,{
+            const res = await fetch('/back/auth/signup',{
                 method:'POST',
                 headers:{
                     'Content-Type': 'application/json',

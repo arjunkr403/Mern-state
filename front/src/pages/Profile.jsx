@@ -20,7 +20,6 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -83,7 +82,7 @@ export default function Profile() {
         password: formData.password,
         avatar: formData.avatar ?? currentUser.avatar,
       };
-      const res = await fetch(`${BACKEND_URL}/back/user/update/${currentUser._id}`, {
+      const res = await fetch(`/back/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +104,7 @@ export default function Profile() {
   const handleDelete = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`${BACKEND_URL}/back/user/delete/${currentUser._id}`, {
+      const res = await fetch(`/back/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -122,7 +121,7 @@ export default function Profile() {
   const handleSignout = async () => {
     try {
       dispatch(signOutStart());
-      const res = await fetch(`${BACKEND_URL}/back/auth/signout`);
+      const res = await fetch("/back/auth/signout");
       const data = await res.json();
       if (!res.ok || data.success === false) {
         dispatch(signOutFailure(data.message));
@@ -138,7 +137,7 @@ export default function Profile() {
     try {
       setShowListingError(false);
       setShowListingsClicked(true);
-      const res = await fetch(`${BACKEND_URL}/back/user/listings/${currentUser._id}`);
+      const res = await fetch(`/back/user/listings/${currentUser._id}`);
       const data = await res.json();
       if (!res.ok || data.success === false) {
         setShowListingError(true);
@@ -152,7 +151,7 @@ export default function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/back/listing/delete/${listingId}`, {
+      const res = await fetch(`/back/listing/delete/${listingId}`, {
         method: "DELETE",
       });
       const data = await res.json();

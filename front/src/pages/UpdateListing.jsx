@@ -4,11 +4,10 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { app } from "../firebase";
 import { useNavigate, useParams } from "react-router-dom";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function UpdateListing() {
   const [files, setFiles] = useState([]);
@@ -24,7 +23,7 @@ export default function UpdateListing() {
     const fetchListing = async () => {
       const listingId = params.listingId;
       //asynchonous http request to fetch or collect data from `/back/listing/get/${listingId}`
-      const res = await fetch(`${BACKEND_URL}/back/listing/get/${listingId}`);
+      const res = await fetch(`/back/listing/get/${listingId}`);
       const data = await res.json(); //convert response into json format
       if (data.success === false) console.log(data.message);
       setFormData(data); //sets the formdata state variable with the retrieved data
@@ -43,6 +42,7 @@ export default function UpdateListing() {
     offer: false,
     regularPrice: 4000,
     discountPrice: 0,
+    offer: false,
     parking: false,
     furnished: false,
   });
@@ -153,7 +153,7 @@ export default function UpdateListing() {
         return setError("Discount price must be lower than Regular price");
       setLoading(true);
       setError(false);
-      const res = await fetch(`${BACKEND_URL}/back/listing/update/${params.listingId}`, {
+      const res = await fetch(`/back/listing/update/${params.listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
