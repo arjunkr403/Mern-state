@@ -14,7 +14,7 @@ import {
   FaShare,
 } from "react-icons/fa";
 import Contact from '../components/Contact';
-import { BACKEND_URL } from "../utils/constants";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
