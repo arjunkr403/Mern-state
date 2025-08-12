@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
@@ -12,7 +13,7 @@ export default function Contact({ listing }) {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`/back/user/${listing.userRef}`);
+        const res = await fetch(`${BACKEND_URL}/back/user/${listing.userRef}`);
         const data = await res.json();
         setLandlord(data);
       } catch (error) {

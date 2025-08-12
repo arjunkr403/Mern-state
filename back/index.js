@@ -30,7 +30,8 @@ app.use(cookieParser());
 
 //Configure CORS
 app.use(cors({
-  origin: "http://localhost:5174", // frontend URL
+  origin: ["https://homeheaven-h3kv.onrender.com",
+    "http://localhost:5174"], // frontend URL
   credentials: true // if you send cookies or auth headers
 }));
 

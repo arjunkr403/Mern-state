@@ -3,6 +3,7 @@ import { app } from '../firebase';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export default function OAuth() {
     const dispatch=useDispatch();
     const nav=useNavigate();
@@ -11,7 +12,7 @@ export default function OAuth() {
             const provider = new GoogleAuthProvider()
             const auth = getAuth(app)
             const result = await signInWithPopup(auth, provider)
-            const res = await fetch('/back/auth/google', {
+            const res = await fetch(`${BACKEND_URL}/back/auth/google`, {
                 method:'POST',
                 headers: {
                     'Content-Type':'application/json',
